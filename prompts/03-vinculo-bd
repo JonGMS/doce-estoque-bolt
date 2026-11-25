@@ -1,0 +1,40 @@
+Atualize meu projeto existente Doce Estoque, um sistema de gerenciamento de brigadeiros para uma confeiteira autônoma. Implemente as quatro telas abaixo em React + Tailwind, com integração real ao Supabase.
+
+Antes de editar, inspecione as rotas, os componentes, o layout, a integração com o Supabase e o schema existente. Reaproveite o cabeçalho, as cores, a navegação, os componentes e as tabelas sempre que forem compatíveis. Preserve as funcionalidades atuais de estoque, receitas e pedidos. Se uma tabela equivalente já existir, use-a. Se faltar algum campo ou relacionamento, faça uma migration incremental que preserve os dados existentes.
+
+1. Componentes base reutilizáveis
+
+Crie ou revise Button, Input, Card e Badge. Use os quatro componentes nas telas novas e nas telas atualizadas. O Button deve suportar carregamento e estado desabilitado. O Input deve ter label, mensagem de erro e associação acessível entre os dois. Use Card para agrupar conteúdo e Badge para exibir status. Mantenha os componentes simples e explique no README qualquer hook ou padrão novo que mereça revisão.
+
+2. Tela de produtos ativos
+
+Liste os produtos ativos com uma consulta real ao Supabase. Mostre nome, preço e informações relevantes que já existam no cadastro, como sabor ou unidade de venda. Inclua um atalho para Nova encomenda. Se a lista vier vazia, explique que é preciso ter um produto ativo para montar uma encomenda e ofereça acesso ao cadastro de produtos existente, se houver.
+
+3. Tela de cadastro de cliente
+
+Crie um formulário com nome e telefone/WhatsApp. Valide no cliente os campos obrigatórios e o formato do telefone para orientar o preenchimento. Salve com INSERT no Supabase. Exiba a confirmação após o retorno do banco e ofereça um atalho para criar uma encomenda para esse cliente. Se o salvamento falhar, mantenha os valores digitados e permita tentar de novo.
+
+4. Tela de nova encomenda
+
+Permita selecionar um cliente cadastrado e um produto ativo, informar a quantidade e escolher a data de entrega. Inclua horário e observações se forem compatíveis com o modelo atual. Valide a quantidade como inteiro positivo e os campos obrigatórios antes do envio.
+
+Salve a encomenda com chaves estrangeiras reais para cliente e produto. Se o banco já usar uma tabela de itens, grave a encomenda e seu item em uma operação atômica para evitar pedidos incompletos. Confirme o sucesso só depois do retorno do Supabase. Após salvar, ofereça um atalho para abrir a Agenda de entregas na data escolhida. Se não houver clientes ou produtos ativos, mostre qual cadastro é necessário e um atalho para abrir a tela correspondente.
+
+5. Tela de agenda de entregas
+
+Abra com o dia atual selecionado e permita trocar a data. Consulte o Supabase pela data selecionada e exiba as encomendas em um grid responsivo, ordenadas por horário quando esse campo existir. Mostre cliente, produto, quantidade e status disponível no sistema. Use a data local exibida no seletor para evitar que a encomenda apareça no dia anterior ou seguinte. Se a data estiver vazia, mostre a mensagem “Nenhuma entrega para este dia” e ofereça o botão Nova encomenda.
+
+Requisitos de integração e experiência
+
+- Conecte as quatro telas à navegação do projeto com links e botões funcionais.
+- Use loading, empty, success e error conforme o contexto de cada tela. Em formulários, diferencie formulário vazio, ausência de dados para seleção, envio em andamento, confirmação e erro.
+- Simule chamadas de 10 segundos. Durante a espera, mostre feedback visível. No envio, bloqueie cliques duplicados. Em caso de falha, mostre uma mensagem útil e permita nova tentativa.
+- Use as validações do frontend para orientar o preenchimento. Garanta a integridade no Supabase com as restrições, chaves estrangeiras e políticas de acesso adequadas ao projeto. Preserve o modelo de autenticação existente e mantenha credenciais privilegiadas fora do frontend.
+- Use dados reais do Supabase nas telas. Confirme que clientes e encomendas criados continuam disponíveis após recarregar a página.
+- Teste as quatro telas em 375 px, 768 px e 1280 px. Confira navegação, formulários, grid e ausência de rolagem horizontal.
+- Atualize o README com instruções de execução, nomes das variáveis de ambiente, migrations aplicadas e capturas reais das quatro telas. Explique o comportamento com demora, falha e retorno vazio, quais validações ficam no frontend e quais garantias ficam no banco. Registre o que foi revisado no código gerado.
+- Use o repositório Git já vinculado ao projeto e registre as alterações em um commit. Use o deploy público existente, se estiver configurado, e registre o link no README. Informe qualquer etapa que dependa de acesso ou credencial indisponível.
+
+Critério principal de aceite
+
+Deve ser possível abrir a lista de produtos, cadastrar um cliente, criar uma encomenda para esse cliente e encontrá-la na agenda do dia escolhido, inclusive depois de recarregar a página. Ao terminar, informe quais rotas foram atualizadas, quais migrations foram necessárias e quais verificações foram realmente executadas.
